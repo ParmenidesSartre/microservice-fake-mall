@@ -7,6 +7,9 @@ The fictional e-commerce application will be an online platform for customers to
 API Gateway: 
 - The API gateway will be responsible for handling incoming requests from customers and routing them to the appropriate microservice. It will also handle authentication and authorization for the microservices. Technology Suggestion: Kong (open source API gateway built on top of NGINX).
 
+User Management Microservice: 
+- The user service will handle all user management functionality, including creating new users, authenticating users, and managing user roles and permissions. Technology Suggestion: Java with Spring Boot for the microservice framework.
+
 Product Catalog Microservice:
 - This microservice will be responsible for managing the product catalog and providing information about products to customers. It will handle tasks such as adding new products, updating existing products, and retrieving product information for customers. Technology Suggestion: Java with Spring Boot for the microservice framework.
 
@@ -25,6 +28,14 @@ Customer Reviews Microservice:
 - /cart: routes to the Shopping Cart Microservice to add or remove items from a customer's cart
 - /orders: routes to the Order Management Microservice to place or view orders
 - /reviews: routes to the Customer Reviews Microservice to submit or view product reviews
+
+### User Management Microservice Routes:
+- /register: allows a user to create a new account
+- /login: allows a user to login to their account
+- /profile: retrieves and displays a user's profile information
+- /profile/update: allows a user to update their profile information
+- /password/reset: allows a user to reset their password
+- /roles/{username}: retrieves and displays a user's roles and permissions
 
 ### Product Catalog Microservice Routes:
 - /products: retrieves and displays a list of all products
@@ -51,7 +62,83 @@ Customer Reviews Microservice:
 - /reviews/approve/{review_id}: approves a review for display to other customers
 - /reviews/reject/{review_id}: rejects a review and removes it from the list of displayed reviews
 
+## List of schema
+
+### User Schema
+```
+User {
+  id: ObjectId,
+  username: String,
+  email: String,
+  password: String,
+  first_name: String,
+  last_name: String,
+  roles: [String]
+}
+```
+
+### Product Schema
+```
+Product {
+  id: ObjectId,
+  name: String,
+  price: Number,
+  description: String,
+  image: String,
+  categories: [String],
+  quantity: Number
+}
+```
+
+### Cart Schema
+```
+Cart {
+  id: ObjectId,
+  customer_id: ObjectId,
+  items: [
+    {
+      product_id: ObjectId,
+      quantity: Number
+    }
+  ]
+}
+```
+
+### Order Schema
+
+```
+Order {
+  id: ObjectId,
+  customer_id: ObjectId,
+  items: [
+    {
+      product_id: ObjectId,
+      quantity: Number
+    }
+  ],
+  total_cost: Number,
+  status: String (pending, shipped, delivered, cancelled)
+}
+```
+
+### Review Schema 
+```
+Review {
+  id: ObjectId,
+  customer_id: ObjectId,
+  product_id: ObjectId,
+  rating: Number,
+  title: String,
+  review: String,
+  status: String (pending, approved, rejected)
+}
+```
+
 ## Interactions Between Microservices:
+
+User Management Microservice:
+- The user service will provide authentication tokens to the API gateway, which will be used to validate requests from users.
+- The user service will retrieve and update user information from the database as needed.
 
 Product Catalog Microservice and Shopping Cart Microservice: 
 - The Shopping Cart Microservice will retrieve product information from the Product Catalog Microservice when a customer adds an item to their cart.
