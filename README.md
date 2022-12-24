@@ -66,9 +66,8 @@ Customer Reviews Microservice:
 ## List of schema
 
 ### User Schema
-```
 The "users" collection in the MongoDB database has the following fields and validation rules:
-
+```
 - **username** (required, unique, string): the username of the user. The value of this field is trimmed and lowercased before being stored in the database.
 - **name** (string): the name of the user. The value of this field is lowercased before being stored in the database.
 - **address** (string): the address of the user.
