@@ -4,7 +4,7 @@
 
 <p align="center">This project is built upon the work and contributions of many individuals who have come before me.I am grateful for the opportunities to learn and grow from their experiences and insights.</p>
 
-<p align="center">Listed below the technology i have used to complete this project.</p>
+<p align="center">Listed below is the technology i have used to complete this project.</p>
 
 ## Technologies Used
 
