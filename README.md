@@ -1,4 +1,43 @@
 # Microservice Fake Mall
+
+<p align="center">"If I have seen further, it is by standing on the shoulders of giants." - Sir Isaac Newton</p>
+
+<p align="center">This project is built upon the work and contributions of many individuals who have come before me.I am grateful for the opportunities to learn and grow from their experiences and insights.</p>
+
+<p align="center">Listed below the technology i have used to complete this project.</p>
+
+## Technologies Used
+
+### Version Control
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png" width="150" height="150">
+  <img src="https://user-images.githubusercontent.com/25181517/192108374-8da61ba1-99ec-41d7-80b8-fb2f7c0a4948.png" width="150" height="150">
+</div>
+
+We use Git for version control and collaboration on this project.
+
+### Back-End
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png" width="100" height="100">
+  <img src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" width="100" height="100">
+  <img src="https://user-images.githubusercontent.com/25181517/183859966-a3462d8d-1bc7-4880-b353-e2cbed900ed6.png" width="100" height="100">
+</div>
+
+I use the Express.js framework and the Node.js runtime environment for back-end development in this project.
+
+### Database
+<div style="display: flex; justify-content: space-between;">
+<img src="https://user-images.githubusercontent.com/25181517/182884177-d48a8579-2cd0-447a-b9a6-ffc7cb02560e.png" width="100" height="100">
+<img src="https://user-images.githubusercontent.com/25181517/182884894-d3fa6ee0-f2b4-4960-9961-64740f533f2a.png" width="100" height="100">
+</div>
+I use MongoDB and Redis as the database for this project.
+
+### Message Broker
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://api.nuget.org/v3-flatcontainer/rabbitmq.attributes/1.0.1/icon" width="100" height="100">
+</div>
+I use RabbitMQ as the message broker between microservices for this project.
 ## Overview:
 The fictional e-commerce application will be an online platform for customers to browse, purchase, and review products. The application will have a variety of microservices handling different functionality, including a product catalog, shopping cart, order management, and customer reviews. The application will also utilize an API gateway to handle requests and route them to the appropriate microservice.
 
