@@ -14,7 +14,15 @@ const createUser = {
   }),
 };
 
+const loginUser = {
+  body: joi.object().keys({
+    username: joi.string().required(),
+    password: joi.string().required(),
+  }),
+};
+
 module.exports = {
   getUserById,
   createUser,
+  loginUser,
 };
