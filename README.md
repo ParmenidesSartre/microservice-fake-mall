@@ -32,8 +32,9 @@ Customer Reviews Microservice:
 ### User Management Microservice Routes:
 - /register: allows a user to create a new account
 - /login: allows a user to login to their account
+- /logout: allows a user to logout of their account
 - /profile: retrieves and displays a user's profile information
-- /profile/update: allows a user to update their profile information
+- /profile: allows a user to update their profile information
 - /password/reset: allows a user to reset their password
 - /roles/{username}: retrieves and displays a user's roles and permissions
 
