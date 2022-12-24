@@ -70,9 +70,10 @@ Customer Reviews Microservice:
 - /reviews: routes to the Customer Reviews Microservice to submit or view product reviews
 
 ### User Management Microservice Routes:
-- /register: allows a user to create a new account
-- /login: allows a user to login to their account
-- /logout: allows a user to logout of their account
+- /: retrieves and displays a list of all users ( DONE )
+- /register: allows a user to create a new account ( DONE )
+- /login: allows a user to login to their account ( DONE )
+- /logout: allows a user to logout of their account ( DONE )
 - /profile: retrieves and displays a user's profile information
 - /profile: allows a user to update their profile information
 - /password/reset: allows a user to reset their password
