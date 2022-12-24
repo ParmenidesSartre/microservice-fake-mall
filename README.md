@@ -67,15 +67,14 @@ Customer Reviews Microservice:
 
 ### User Schema
 ```
-User {
-  id: ObjectId,
-  username: String,
-  email: String,
-  password: String,
-  first_name: String,
-  last_name: String,
-  roles: [String]
-}
+The "users" collection in the MongoDB database has the following fields and validation rules:
+
+- **username** (required, unique, string): the username of the user. The value of this field is trimmed and lowercased before being stored in the database.
+- **name** (string): the name of the user. The value of this field is lowercased before being stored in the database.
+- **address** (string): the address of the user.
+- **defaultAddress** (string): the default address of the user.
+- **password** (required, string): the password of the user.
+
 ```
 
 ### Product Schema
