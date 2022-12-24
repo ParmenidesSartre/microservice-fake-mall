@@ -106,13 +106,37 @@ Customer Reviews Microservice:
 ## List of schema
 
 ### User Schema
-The "users" collection in the MongoDB database has the following fields and validation rules:
+
 ```
-- **username** (required, unique, string): the username of the user. The value of this field is trimmed and lowercased before being stored in the database.
-- **name** (string): the name of the user. The value of this field is lowercased before being stored in the database.
-- **address** (string): the address of the user.
-- **defaultAddress** (string): the default address of the user.
-- **password** (required, string): the password of the user.
+Product {
+  id: ObjectId,
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim : true,
+    lowercase: true
+  },
+  name: {
+    type: String,
+    lowercase: true
+  },
+  address: {
+    type: String
+  },
+  defaultAddress: {
+    type: String
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  price: Number,
+  description: String,
+  image: String,
+  categories: [String],
+  quantity: Number
+}
 
 ```
 
