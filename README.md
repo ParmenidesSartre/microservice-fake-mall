@@ -38,6 +38,7 @@ I use MongoDB and Redis as the database for this project.
   <img src="https://api.nuget.org/v3-flatcontainer/rabbitmq.attributes/1.0.1/icon" width="100" height="100">
 </div>
 I use RabbitMQ as the message broker between microservices for this project.
+
 ## Overview:
 The fictional e-commerce application will be an online platform for customers to browse, purchase, and review products. The application will have a variety of microservices handling different functionality, including a product catalog, shopping cart, order management, and customer reviews. The application will also utilize an API gateway to handle requests and route them to the appropriate microservice.
 
