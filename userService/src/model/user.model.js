@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const toObject = require("./plugin/toObject");
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const toObject = require('./plugin/toObject');
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -27,9 +27,9 @@ const userSchema = new mongoose.Schema({
 });
 
 // add a custom method to the user schema
-userSchema.pre("save", async function (next) {
+userSchema.pre('save', async function (next) {
   const user = this;
-  if (user.isModified("password")) {
+  if (user.isModified('password')) {
     user.password = await bcrypt.hash(user.password, 8);
   }
   next();
@@ -37,5 +37,5 @@ userSchema.pre("save", async function (next) {
 
 userSchema.plugin(toObject);
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 module.exports = User;

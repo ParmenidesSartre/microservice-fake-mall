@@ -1,5 +1,5 @@
-const httpStatus = require("http-status");
-const userService = require("../service/user.service");
+const httpStatus = require('http-status');
+const userService = require('../service/user.service');
 
 /**
  * @function
