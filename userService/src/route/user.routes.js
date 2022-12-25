@@ -27,7 +27,19 @@ router
   });
 
 router
-  .route("/:userId")
-  .get(validate(validation.getUserById), controller.getUserById);
+  .route('/login')
+  .post(validate(validation.loginUser), controller.loginUser);
+
+router.route('/logout').post(auth, controller.logoutUser);
+
+router
+  .route('/profile')
+  .get(auth, controller.getUserById)
+  .put(auth, validate(validation.updateUser), controller.updateUser);
+
+router
+  .route('/password')
+  .put(auth, validate(validation), controller.updatePassword);
+
 
 module.exports = router;

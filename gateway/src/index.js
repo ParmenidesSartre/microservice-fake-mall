@@ -23,6 +23,9 @@ app.use("/user", (req, res, next) => {
     method: `${req.method}`, // HTTP request method
     url: `http://localhost:3000${req.url}`, // URL for the request
     data: req.body, // Request body data
+    headers: req.headers.authorization
+      ? { authorization: req.headers.authorization }
+      : {},
   };
 
   // Create a new circuit breaker for the request to the user service
