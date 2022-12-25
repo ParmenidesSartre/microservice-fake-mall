@@ -82,10 +82,32 @@ const logoutUser = async (req, res) => {
   }
 };
 
+
+const updateUser = async (req, res) => {
+  try {
+    const user = await userService.updateUser(req);
+    res.status(httpStatus.OK).send(user);
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
+  }
+};
+
+const updatePassword = async (req, res) => {
+  try {
+    const user = await userService.updatePassword(req);
+    res.status(httpStatus.OK).send(user);
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
+  }
+};
+
+
 module.exports = {
   getUsers,
   getUserById,
   createUser,
   loginUser,
   logoutUser,
+  updateUser,
+  updatePassword,
 };

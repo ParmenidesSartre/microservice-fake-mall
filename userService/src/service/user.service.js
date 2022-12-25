@@ -24,7 +24,7 @@ getUserById is a function that retrieves a single user from the database by thei
 @returns {Object} user - An object representing the user with the specified ID.
 */
 const getUserById = async (data) => {
-  const user = await User.findById(data.params.userId);
+  const user = await User.findById(data.user._id);
   return user.toObject();
 };
 
@@ -58,6 +58,13 @@ const createUser = async (data) => {
   return { token };
 };
 
+
+/**
+
+loginUser is a function that verifies the username and password provided in the request body, and returns a JSON web token (JWT) for the authenticated user.
+@param {Object} data - An object containing the request data, including the username and password in the body.
+@returns {Object} token - An object containing the JWT for the authenticated user. If the username does not exist or the authentication fails, a string message is returned instead.
+*/
 const loginUser = async (data) => {
   const { username, password } = data.body;
 
@@ -84,6 +91,13 @@ const loginUser = async (data) => {
   return { token };
 };
 
+
+/**
+
+logoutUser is a function that invalidates the JSON web token (JWT) provided in the request header, and returns a new JWT with the same user ID but a different "jti" (JWT ID) claim.
+@param {Object} data - An object containing the request data, including the user's JWT in the header.
+@returns {Object} token - An object containing a new JWT for the user with the same user ID but a different jti claim.
+*/
 const logoutUser = async (data) => {
   const jti = uuidv4();
 
@@ -94,6 +108,48 @@ const logoutUser = async (data) => {
   );
   await Token.create({ jti });
   return { token: invalidatedToken };
+
+};
+
+/**
+
+updateUser is a function that updates the details of a user in the database based on the data in the request body.
+@param {Object} data - An object containing the request data, including the user's updated data in the body and the user's ID as a parameter.
+@returns {Object} updatedUser - An object representing the updated user. If the update fails, a string message is returned instead.
+*/
+const updateUser = async (data) => {
+  const user = await User.findByIdAndUpdate(data.user._id, data.body, {
+    new: true,
+  });
+
+  if (!user) {
+    return 'User update failed';
+  }
+
+  return user.toObject();
+};
+
+/**
+
+updatePassword is a function that updates the password of a user in the database based on the data in the request body.
+@param {Object} data - An object containing the request data, including the user's updated data in the body and the user's ID as a parameter.
+@returns {Object} updatedUser - An object representing the updated user. If the update fails, a string message is returned instead.
+*/
+const updatePassword = async (data) => {
+  const { password } = data.body;
+  const user = await User.findByIdAndUpdate(
+    data.user._id,
+    { password },
+    {
+      new: true,
+    }
+  );
+
+  if (!user) {
+    return 'Password update failed';
+  }
+
+  return user.toObject();
 };
 
 module.exports = {
@@ -102,4 +158,6 @@ module.exports = {
   createUser,
   loginUser,
   logoutUser,
+  updateUser,
+  updatePassword,
 };

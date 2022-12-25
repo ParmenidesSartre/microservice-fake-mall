@@ -8,17 +8,17 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
-    lowercase: true,
   },
   name: {
     type: String,
     lowercase: true,
   },
   address: {
-    type: String,
+    type: [String],
   },
   defaultAddress: {
     type: String,
+    default: '',
   },
   password: {
     type: String,
@@ -31,6 +31,25 @@ userSchema.pre('save', async function (next) {
   const user = this;
   if (user.isModified('password')) {
     user.password = await bcrypt.hash(user.password, 8);
+  }
+  next();
+});
+
+
+
+// add a custom method to the user schema
+userSchema.pre('save', async function (next) {
+  const user = this;
+  if (user.isModified('password')) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+  next();
+});
+
+userSchema.pre('findOneAndUpdate', async function (next) {
+  const user = this;
+  if (user._update.password) {
+    user._update.password = await bcrypt.hash(user._update.password, 8);
   }
   next();
 });
