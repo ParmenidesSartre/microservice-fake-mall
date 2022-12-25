@@ -14,6 +14,7 @@ const loginUser = {
   }),
 };
 
+
 const updateUser = {
   body: joi.object().keys({
     username: joi.string(),
@@ -34,4 +35,5 @@ module.exports = {
   loginUser,
   updateUser,
   updatePassword,
+
 };

@@ -1,4 +1,9 @@
-const User = require("../model/user.model");
+const User = require('../model/user.model');
+const Token = require('../model/token.model');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const transformer = require('../utils/transformer');
+const { v4: uuidv4 } = require('uuid');
 
 /**
 
@@ -8,7 +13,8 @@ getUsers is a function that retrieves all users from the database.
 
 const getUsers = async () => {
   const users = await User.find({});
-  return users;
+  const usersTransformed = transformer(users);
+  return usersTransformed;
 };
 
 /**
@@ -22,6 +28,11 @@ const getUserById = async (data) => {
   return user.toObject();
 };
 
+/**
+ * createUser is a function that creates a new user in the database based on the data in the request body, and returns a JWT for the newly created user.
+ * @param {Object} data - An object containing the request data, including the user's data in the body.
+ * @returns {Object} token - An object containing the JWT for the newly created user.
+ */
 const createUser = async (data) => {
   // check if the username is already in use
   const user = await User.findOne({ username: data.body.username });
@@ -46,6 +57,7 @@ const createUser = async (data) => {
 
   return { token };
 };
+
 
 /**
 
@@ -79,6 +91,7 @@ const loginUser = async (data) => {
   return { token };
 };
 
+
 /**
 
 logoutUser is a function that invalidates the JSON web token (JWT) provided in the request header, and returns a new JWT with the same user ID but a different "jti" (JWT ID) claim.
@@ -95,6 +108,7 @@ const logoutUser = async (data) => {
   );
   await Token.create({ jti });
   return { token: invalidatedToken };
+
 };
 
 /**

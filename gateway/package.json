@@ -4,7 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "fix": "eslint --fix ."
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "lint-staged",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
   },
   "keywords": [
     "Node.js, Express, Oposum, API Gateway"
@@ -19,5 +31,9 @@
     "http-status": "^1.5.3",
     "nodemon": "^2.0.20",
     "opossum": "^7.0.1"
+  },
+  "devDependencies": {
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0"
   }
 }

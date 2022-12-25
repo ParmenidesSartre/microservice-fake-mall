@@ -1,8 +1,8 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const axios = require("axios");
-const logger = require("./config/logger");
-const CircuitBreaker = require("opossum");
+const express = require('express');
+const bodyParser = require('body-parser');
+const axios = require('axios');
+const logger = require('./config/logger');
+const CircuitBreaker = require('opossum');
 
 const app = express();
 // Body Parser
@@ -17,7 +17,7 @@ const options = {
 };
 
 // Use the '/user' route to proxy requests to the user service
-app.use("/user", (req, res, next) => {
+app.use('/user', (req, res) => {
   // Configure the request to the user service
   const config = {
     method: `${req.method}`, // HTTP request method
@@ -44,15 +44,14 @@ app.use("/user", (req, res, next) => {
   );
 
   // Fire the request to the user service through the circuit breaker
-  breaker.fire().catch((error) => {
+  breaker.fire().catch(() => {
     // Send an error message if the request to the user service fails
-    res.status(500).send({ message: "User service fail to respond." });
+    res.status(500).send('User service fail to respond.');
   });
 });
-
 
 // Start the API gateway on port 3003
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
-   logger.info(`API gateway listening on port ${PORT}`);
+  logger.info(`API gateway listening on port ${PORT}`);
 });

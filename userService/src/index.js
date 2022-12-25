@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 const logger = require('./config/logger');
 
 // Database
-dotenv.config({ path: "./src/config.env" });
+dotenv.config({ path: './src/config.env' });
 
 const app = express();
 
@@ -14,7 +14,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/", userRoutes);
+app.use('/', userRoutes);
 
 
 app.listen(3000, () => {
