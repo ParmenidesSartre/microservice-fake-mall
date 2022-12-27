@@ -163,12 +163,24 @@ Product {
 Product {
   id: ObjectId,
   name: String,
-  price: Number,
+  price: Number,  // base price for the product
   description: String,
   image: String,
   categories: [String],
-  quantity: Number
+  quantity: Number,
+  variations: [
+    {
+      name: String,  // name of the variation (e.g. "Size", "Color")
+      options: [
+        {
+          value: String,  // value of the variation option (e.g. "Large", "Red")
+          price: Number,  // price of the variation option
+        }
+      ]
+    }
+  ]
 }
+
 ```
 
 ### Cart Schema
