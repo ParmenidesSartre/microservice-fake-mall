@@ -35,8 +35,6 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-
-
 // add a custom method to the user schema
 userSchema.pre('save', async function (next) {
   const user = this;
@@ -50,6 +48,10 @@ userSchema.pre('findOneAndUpdate', async function (next) {
   const user = this;
   if (user._update.password) {
     user._update.password = await bcrypt.hash(user._update.password, 8);
+  }
+
+  if (user._update.address && user._update.address.length > 0) {
+    user._update.defaultAddress = user._update.address;
   }
   next();
 });

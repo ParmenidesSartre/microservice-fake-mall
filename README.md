@@ -93,20 +93,19 @@ Relational databases are typically ACID compliant, which makes them well-suited 
 
 
 ### Product Catalog Microservice Routes:
-- GET /products: retrieves and displays a list of all products
-- GET /products/{id}: retrieves and displays information for a specific product
-- POST /products/create: creates a new product in the catalog
-- PUT /products/update/{id}: updates an existing product in the catalog
-- GET /products/search?query={query}: searches the product catalog for products matching the specified query, and returns a list of matching products
-- GET /products/categories: retrieves a list of all available product categories
-- GET /products/categories/{id}: retrieves and displays information for a specific product category
-- POST /products/categories: creates a new product category
+- GET /product: retrieves and displays a list of all products ( DONE )
+- GET /product/{id}: retrieves and displays information for a specific product ( DONE )
+- POST /product: creates a new product in the catalog ( DONE )
+- PUT /product/update/{id}: updates an existing product in the catalog ( DONE )
+- GET /product?search={query}: searches the product catalog for products matching the specified query, and returns a list of matching products ( DONE )
+- GET /product/category: retrieves a list of all available product categories ( DONE )
+- GET /product/category/{id}: retrieves and displays information for a specific product category ( DONE )
+- POST /product/category: creates a new product category ( DONE )
 
 ### Shopping Cart Microservice Routes:
 - /cart: retrieves and displays the contents of a customer's cart
 - /cart/add/{product_id}: adds an item to a customer's cart
 - /cart/remove/{product_id}: removes an item from a customer's cart
-- /cart/total: calculates the total cost of items in a customer's cart
 
 ### Order Management Microservice Routes:
 - /orders: retrieves and displays a list of a customer's orders

@@ -1,12 +1,13 @@
-const User = require('../model/user.model');
-const Token = require('../model/token.model');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const transformer = require('../utils/transformer');
-const { v4: uuidv4 } = require('uuid');
+const User = require("../model/user.model");
+const Token = require("../model/token.model");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const transformer = require("../utils/transformer");
+const { v4: uuidv4 } = require("uuid");
+
+
 
 /**
-
 getUsers is a function that retrieves all users from the database.
 @returns {Array} users - An array of all the users in the database.
 */
@@ -37,13 +38,13 @@ const createUser = async (data) => {
   // check if the username is already in use
   const user = await User.findOne({ username: data.body.username });
   if (user) {
-    return 'Username already exists';
+    return "Username already exists";
   }
   // create the new user
   const createdUser = await User.create(data.body);
 
   if (!createdUser) {
-    return 'User creation failed';
+    return "User creation failed";
   }
 
   // generate a JWT for the new user
@@ -58,7 +59,6 @@ const createUser = async (data) => {
   return { token };
 };
 
-
 /**
 
 loginUser is a function that verifies the username and password provided in the request body, and returns a JSON web token (JWT) for the authenticated user.
@@ -71,12 +71,12 @@ const loginUser = async (data) => {
   // Verify if password given is correct
   const user = await User.findOne({ username: username });
   if (!user) {
-    return 'Username does not exist';
+    return "Username does not exist";
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return 'Authentication failed';
+    return "Authentication failed";
   }
 
   // generate a JWT for the new user
@@ -90,7 +90,6 @@ const loginUser = async (data) => {
 
   return { token };
 };
-
 
 /**
 
@@ -108,7 +107,6 @@ const logoutUser = async (data) => {
   );
   await Token.create({ jti });
   return { token: invalidatedToken };
-
 };
 
 /**
@@ -123,7 +121,7 @@ const updateUser = async (data) => {
   });
 
   if (!user) {
-    return 'User update failed';
+    return "User update failed";
   }
 
   return user.toObject();
@@ -146,7 +144,7 @@ const updatePassword = async (data) => {
   );
 
   if (!user) {
-    return 'Password update failed';
+    return "Password update failed";
   }
 
   return user.toObject();

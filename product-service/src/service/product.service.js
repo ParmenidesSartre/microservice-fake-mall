@@ -2,9 +2,24 @@ const Product = require("../model/product.model");
 const Category = require("../model/category.model");
 const transformer = require("../utils/transformer");
 const formatter = require("../utils/formatter");
+const { listenForRequests, sendRequest } = require("../config/messenger");
+
+listenForRequests("product-service", async (request) => {
+  // parse the request data
+  const requestData = JSON.parse(request.content.toString());
+  if (requestData.type === "getProducts") {
+    const productIds = requestData.data.productIds;
+    const promises = productIds.map((id) => Product.findById(id));
+    const products = await Promise.all(promises);
+    await sendRequest(
+      request.properties.replyTo,
+      JSON.stringify({ products }),
+      request.properties.correlationId
+    );
+  }
+});
 
 /**
-
 getProduct is a function that retrieves all products from the database.
 @returns {Array} products - An array of all the products in the database.
 */
@@ -22,6 +37,7 @@ const getProducts = async (data) => {
       },
       {
         $or: [
+          { _id: { $in: data.query.ids } },
           { description: { $exists: true, $ne: "" } },
           { name: { $exists: true, $ne: "" } },
           { categories: { $exists: true, $ne: "" } },
